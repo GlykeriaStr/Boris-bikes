@@ -1,7 +1,7 @@
 
 require_relative 'bike'
 
-class Dockingstation
+class DockingStation
 
   DEFAULT_CAPACITY = 20
   attr_accessor :capacity
