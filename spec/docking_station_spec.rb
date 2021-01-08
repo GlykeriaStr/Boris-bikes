@@ -30,15 +30,15 @@ describe Dockingstation do
 
   it 'raises error when full capacity' do
     bike = Bike.new
-    subject.dock(bike)
-    expect { subject.dock(bike) }.to raise_error "No more spaces"
+    20.times { subject.dock Bike.new }
+    expect { subject.dock Bike.new }.to raise_error "No more spaces"
   end
 
-  it {is_expected.to respond_to :bike}
+  it {is_expected.to respond_to :bikes}
 
   it 'show me what you got' do
     bike = Bike.new
     subject.dock(bike)
-    expect(subject.bike).to eq bike
+    expect(subject.bikes).to eq bike
   end
 end

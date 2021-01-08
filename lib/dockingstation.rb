@@ -3,16 +3,20 @@ require_relative 'bike'
 
 class Dockingstation
 
-   def release_bike
-     fail 'No bikes available' unless @bike
-     @bike
-   end
+  def initialize
+    @bikes = []
+  end
 
-   def dock(bike)
-     fail "No more spaces" if @bike
-     @bike = bike
-   end
+  def release_bike
+   fail 'No bikes available' unless @bikes == []
+   @bikes.pop
+  end
 
-   attr_reader :bike
+  def dock(bike)
+   fail "No more spaces" if @bikes.length >= 20
+   @bikes << bike
+  end
+
+  attr_reader :bikes
 
 end
