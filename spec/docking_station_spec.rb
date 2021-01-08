@@ -25,7 +25,7 @@ describe Dockingstation do
 
   it 'docks a bike and stores' do
     bike = Bike.new
-    expect(subject.dock(bike)).to eq bike
+    expect(subject.dock(bike)).to eq [bike]
   end
 
   it 'raises error when full capacity' do
@@ -39,6 +39,21 @@ describe Dockingstation do
   it 'show me what you got' do
     bike = Bike.new
     subject.dock(bike)
-    expect(subject.bikes).to eq bike
+    expect(subject.bikes).to eq [bike]
   end
+
+  it { is_expected.to respond_to :full?}
+  it 'should return true or false if station is full' do
+    expect(subject.full?). to eq false
+    20.times {subject.dock Bike.new}
+    expect(subject.full?).to eq true
+  end
+
+  it {is_expected. to respond_to :empty?}
+  it "should return true or false if station is empty" do
+    expect(subject.empty?).to eq true
+    subject.dock(Bike.new)
+    expect(subject.empty?).to eq false
+  end
+
 end
