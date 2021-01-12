@@ -46,6 +46,12 @@ describe DockingStation do
     expect(subject.dock double (:bike)).to eq [bike]
   end
 
+  it 'docks a bike even if broken' do
+    bike = Bike.new
+    bike.report_broken
+    expect(subject.dock(bike)).to eq [bike]
+  end 
+
   it 'raises error when full capacity' do
     # bike = Bike.new
     subject.capacity.times { subject.dock double :bike }
