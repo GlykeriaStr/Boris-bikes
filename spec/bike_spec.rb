@@ -1,6 +1,7 @@
 require 'bike'
 
 describe Bike do
+  # let(:bike) { double :bike }
     it { is_expected.to respond_to :working? }
 
     it { is_expected.to respond_to :report_broken }
@@ -8,6 +9,7 @@ describe Bike do
     it { is_expected.to respond_to :broken? }
 
     it "should return true if bike is reported_broken" do
+      # allow(bike).to receive(:broken?).and_return true
       bike = Bike.new
       station = DockingStation.new
       bike.report_broken
