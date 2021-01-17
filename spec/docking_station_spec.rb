@@ -1,8 +1,8 @@
 require 'dockingstation'
 
 describe DockingStation do
-  let(:bike) { double :bike}
-  let(:van) { double :van, collect_broken: bike, bikes: bike}
+  let(:bike) { instance_double('Bike')}
+  let(:van) { instance_double('Van', collect: bike, bikes: bike) }
 
   it 'changes the capacity of the station' do
     station = DockingStation.new(30)
@@ -83,7 +83,7 @@ describe DockingStation do
   it 'releases a broken bike to the van' do
     allow(bike).to receive(:broken?).and_return(true)
     subject.dock(bike)
-    van.collect_broken(bike)
+    van.collect(bike)
     subject.release_broken_bike(bike)
     expect(van.bikes).to eq bike
   end

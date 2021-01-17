@@ -1,9 +1,10 @@
 require_relative 'bike'
 
 class Garage
+  attr_reader :bikes
 
-  def initialize(bike)
-    @bike = bike
+  def initialize
+    @bikes = []
     @fixed = false
   end
 
@@ -12,6 +13,11 @@ class Garage
   end
 
   def release_bike(bike)
-    Van.new.bikes << bike
+    van = Van.new
+    van.collect(bike)
+  end
+
+  def store_bike(bike)
+    @bikes << bike
   end
 end

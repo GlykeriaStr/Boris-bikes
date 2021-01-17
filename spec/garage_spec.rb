@@ -4,7 +4,7 @@ require 'bike'
 
 describe Garage do
 
-  subject(:garage) { described_class.new(bike)}
+  subject(:garage) { described_class.new}
   let(:bike) { instance_double("Bike") }
   let(:van) { instance_double( "Van", release_broken_bike: bike, bikes: bike ) }
 
@@ -18,5 +18,11 @@ describe Garage do
     garage.fixed?(bike)
     garage.release_bike(bike)
     expect(van.bikes).to eq bike
+  end
+
+  it 'should store the bikes' do
+    van.release_broken_bike(bike)
+    garage.store_bike(bike)
+    expect(garage.bikes).to include(bike)
   end
 end

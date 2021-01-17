@@ -22,7 +22,7 @@ class DockingStation
 
   def release_broken_bike(bike)
     van = Van.new
-    van.bikes << bike
+    van.collect(bike) if bike.broken?
     @bikes.delete(bike)
   end
 

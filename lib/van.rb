@@ -9,11 +9,17 @@ class Van
     @bikes = []
   end
 
-  def collect_broken(bike)
+  def collect(bike)
     @bikes << bike
   end
 
   def release_broken_bike(bike)
-    garage = Garage.new(bike)
+    garage = Garage.new
+    garage.store_bike(bike)
+  end
+
+  def release_bike(bike)
+    station = DockingStation.new
+    station.dock(bike)
   end
 end
