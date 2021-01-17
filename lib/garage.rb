@@ -1,20 +1,12 @@
 require_relative 'bike'
 
 class Garage
-  attr_reader :bikes
 
-  def initialize
-    @bikes = []
-    @fixed = false
-  end
+include BikeContainer
+  
 
-  def fixed?(bike)
-    @fixed = true
-  end
-
-  def release_bike(bike)
-    van = Van.new
-    van.collect(bike)
+  def fix_bike(bike)
+    bike.fix
   end
 
   def store_bike(bike)

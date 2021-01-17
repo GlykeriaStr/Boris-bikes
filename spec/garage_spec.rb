@@ -5,24 +5,14 @@ require 'bike'
 describe Garage do
 
   subject(:garage) { described_class.new}
-  let(:bike) { instance_double("Bike") }
-  let(:van) { instance_double( "Van", release_broken_bike: bike, bikes: bike ) }
+  let(:bike) { instance_double("Bike", fix: true) }
+  let(:van) { instance_double( "Van", release_broken_bike: bike, bikes: bike) }
+
+  it_behaves_like BikeContainer
 
   it 'should fix a bike' do
-    van.release_broken_bike(bike)
-    expect(garage.fixed?(bike)).to be true
-  end
-
-  it 'should release a bike when it is working' do
-    van.release_broken_bike(bike)
-    garage.fixed?(bike)
-    garage.release_bike(bike)
-    expect(van.bikes).to eq bike
-  end
-
-  it 'should store the bikes' do
-    van.release_broken_bike(bike)
     garage.store_bike(bike)
-    expect(garage.bikes).to include(bike)
+    expect(garage.fix_bike(bike)).to be true
   end
+
 end
