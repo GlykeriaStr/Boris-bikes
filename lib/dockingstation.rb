@@ -1,5 +1,6 @@
 
-require './lib/bike'
+require_relative 'bike'
+require_relative 'van'
 
 class DockingStation
 
@@ -17,6 +18,12 @@ class DockingStation
 
    fail 'Bikes are all broken' if @bikes.all?{|bike| bike.broken?}
    @bikes.pop
+  end
+
+  def release_broken_bike(bike)
+    van = Van.new
+    van.bikes << bike
+    @bikes.delete(bike)
   end
 
   def dock(bike)
